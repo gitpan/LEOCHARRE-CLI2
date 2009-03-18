@@ -10,12 +10,9 @@ my @export_argv = qw/argv_files argv_files_count argv_dirs argv_dirs_count argv_
 @ISA = qw(Exporter);
 @EXPORT_OK = ( qw/yn/, @export_argv );
 %EXPORT_TAGS = ( argv => \@export_argv, all => \@EXPORT_OK, );
-$VERSION = sprintf "%d.%02d", q$Revision: 1.3 $ =~ /(\d+)/g;
+$VERSION = sprintf "%d.%02d", q$Revision: 1.4 $ =~ /(\d+)/g;
 
 #use Smart::Comments '###';
-
-
-
 
 
 sub import {

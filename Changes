@@ -1,3 +1,9 @@
+2009-03-18 15:16  cvs
+
+	* t/: examplescript1.pl, examplescript2.pl, examplescript3.pl:
+	  added some example scripts to show how useful this module is to
+	  me
+
 2009-03-18 14:43  cvs
 
 	* lib/LEOCHARRE/CLI2.pod: updating doc

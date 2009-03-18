@@ -5,7 +5,7 @@ WriteMakefile(
    VERSION_FROM => 'lib/LEOCHARRE/CLI2.pm',
    
 
-   # gen /usr/bin/pmused by Wed Mar 18 14:49:10 EDT 2009 
+   # gen /usr/bin/pmused by Wed Mar 18 15:16:57 EDT 2009 
    PREREQ_PM => {
       'Carp'                              => '1',
       'Cwd'                               => '3',

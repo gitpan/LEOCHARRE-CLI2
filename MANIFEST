@@ -11,5 +11,8 @@ t/02_envs.t
 t/03_argvs.t
 t/05_envs.pl
 t/05_symdump.t
+t/examplescript1.pl
+t/examplescript2.pl
+t/examplescript3.pl
 t/testfile.pl
 META.yml                                 Module meta-data (added by MakeMaker)
