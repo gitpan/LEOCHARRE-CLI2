@@ -1,0 +1,15 @@
+Changes
+INSTALL
+MANIFEST
+Makefile.PL
+README
+lib/LEOCHARRE/CLI2.pm
+lib/LEOCHARRE/CLI2.pod
+t/00_no_opts.t
+t/01_withopts.t
+t/02_envs.t
+t/03_argvs.t
+t/05_envs.pl
+t/05_symdump.t
+t/testfile.pl
+META.yml                                 Module meta-data (added by MakeMaker)

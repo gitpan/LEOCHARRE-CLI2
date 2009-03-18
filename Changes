@@ -1,0 +1,9 @@
+2009-03-18 14:43  cvs
+
+	* lib/LEOCHARRE/CLI2.pod: updating doc
+
+2009-03-17 14:25  cvs
+
+	* MANIFEST, Makefile.PL, lib/LEOCHARRE/CLI2.pm, t/00_no_opts.t,
+	  t/01_withopts.t, t/05_symdump.t: Initial revision
+

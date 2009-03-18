@@ -1,0 +1,28 @@
+--- #YAML:1.0
+name:               LEOCHARRE-CLI2
+version:            1.03
+abstract:           ~
+author:  []
+license:            perl
+distribution_type:  module
+configure_requires:
+    ExtUtils::MakeMaker:  0
+requires:
+    Carp:                 1
+    Cwd:                  3
+    Devel::Symdump:       2.07
+    Exporter:             5
+    Getopt::Std:          1.05
+    Getopt::Std::Strict:  1.01
+    LEOCHARRE::DEBUG:     1.12
+    LEOCHARRE::Dir:       1.06
+    Smart::Comments:      1
+    Test::Simple:         0
+no_index:
+    directory:
+        - t
+        - inc
+generated_by:       ExtUtils::MakeMaker version 6.48
+meta-spec:
+    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
+    version:  1.4
