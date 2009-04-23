@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 use strict;
 use lib './lib';
-use LEOCHARRE::CLI2 ':all', 'This is a description.';
-our $VERSION = sprintf "%d.%02d", q$Revision: 1.2 $ =~ /(\d+)/g;
+use LEOCHARRE::CLI2 ':all', 'This is a description.', '(leocharre)','[Alister]';
+our $VERSION = sprintf "%d.%02d", q$Revision: 1.3 $ =~ /(\d+)/g;
 
 
 

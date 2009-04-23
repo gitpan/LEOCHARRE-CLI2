@@ -10,7 +10,7 @@ my @export_argv = qw/argv_files argv_files_count argv_dirs argv_dirs_count argv_
 @ISA = qw(Exporter);
 @EXPORT_OK = ( qw/yn/, @export_argv );
 %EXPORT_TAGS = ( argv => \@export_argv, all => \@EXPORT_OK, );
-$VERSION = sprintf "%d.%02d", q$Revision: 1.5 $ =~ /(\d+)/g;
+$VERSION = sprintf "%d.%02d", q$Revision: 1.6 $ =~ /(\d+)/g;
 
 #use Smart::Comments '###';
 
@@ -44,11 +44,25 @@ sub import_resolve_opt_string {
       ### testing arg -----------------
       ### $arg
 
-      # if the arg has spaces, it is deemed as the SCRIPT_DESCRIPTION
+     # if arg is between brackers, it is a definition for parent package
+      if ($arg=~/^\[(.+)\]$/){
+         $ENV{SCRIPT_PARENT_PACKAGE} = $1;
+         next;
+      }
+
+      # if arg is between parens, it is a definition for what man page to look up more in
+      if ($arg=~/^\((.+)\)$/){
+         
+         $ENV{SCRIPT_MAN} = $1;
+         next;
+      }
+
+      # if the arg has spaces, it is deemed as the SCRIPT_DESCRIPTION    
       if ($arg=~/ /){
          $ENV{SCRIPT_DESCRIPTION} = $arg;
          next;
       }
+
 
       my $tag = $arg;
       $tag=~s/^\://;
@@ -223,14 +237,27 @@ sub yn {
 sub usage {
 
    my $script_name = $ENV{SCRIPT_FILENAME};
-
    my $script_description = $ENV{SCRIPT_DESCRIPTION};
+   my $script_man = $ENV{SCRIPT_MAN};
+   my $script_also = $ENV{SCRIPT_PARENT_PACKAGE};
+
    my $script_version = $main::VERSION;
 
    $script_version and ($script_version=" v $script_version");
    
    $script_description and $script_description=~s/\n*$/\n/;
    
+   if( $script_man ){   
+      unless( $script_man=~/man /){
+         $script_man = "\nTry 'man $script_man' for more info.\n";
+      }
+   }
+
+   if( $script_also ){      
+      $script_also = "\n$script_also - parent package\n";
+   }
+
+
 
    my $out = "$script_name [OPTION]...\n$script_description\n";
 
@@ -244,7 +271,7 @@ sub usage {
       $out.="\t-$opt\t\t$desc\n";
    }
 
-   "$out\n";
+   "$out\n$script_man$script_also";
 }
 
 
