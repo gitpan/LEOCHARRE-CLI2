@@ -10,7 +10,7 @@ my @export_argv = qw/argv_files argv_files_count argv_dirs argv_dirs_count argv_
 @ISA = qw(Exporter);
 @EXPORT_OK = ( qw/yn/, @export_argv );
 %EXPORT_TAGS = ( argv => \@export_argv, all => \@EXPORT_OK, );
-$VERSION = sprintf "%d.%02d", q$Revision: 1.4 $ =~ /(\d+)/g;
+$VERSION = sprintf "%d.%02d", q$Revision: 1.5 $ =~ /(\d+)/g;
 
 #use Smart::Comments '###';
 
@@ -43,6 +43,12 @@ sub import_resolve_opt_string {
    for my $arg ( @$import_list ){
       ### testing arg -----------------
       ### $arg
+
+      # if the arg has spaces, it is deemed as the SCRIPT_DESCRIPTION
+      if ($arg=~/ /){
+         $ENV{SCRIPT_DESCRIPTION} = $arg;
+         next;
+      }
 
       my $tag = $arg;
       $tag=~s/^\://;
@@ -186,10 +192,10 @@ sub argv_cwd { _argv('CWD') }
 INIT {
    ### LEOCHARRE CLI2 INIT
    $main::opt_h 
-      and print &main::usage 
+      and print STDERR &main::usage 
       and exit;
    $main::opt_v 
-      and print $main::VERSION 
+      and print STDERR $main::VERSION 
       and exit;
 }
 
@@ -216,9 +222,19 @@ sub yn {
 # auto generated usage
 sub usage {
 
+   my $script_name = $ENV{SCRIPT_FILENAME};
 
-   my $out = "$ENV{SCRIPT_FILENAME} [OPTION]...\n\n";
+   my $script_description = $ENV{SCRIPT_DESCRIPTION};
+   my $script_version = $main::VERSION;
 
+   $script_version and ($script_version=" v $script_version");
+   
+   $script_description and $script_description=~s/\n*$/\n/;
+   
+
+   my $out = "$script_name [OPTION]...\n$script_description\n";
+
+   
    for my $opt ( sort keys %OPT ){
       my $desc = 
          $opt eq 'h' ? 'help' :

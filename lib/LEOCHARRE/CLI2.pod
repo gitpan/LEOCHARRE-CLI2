@@ -8,8 +8,8 @@ LEOCHARRE::CLI2 - quick cli addons
 
 In script.pl:
 
-   use LEOCHARRE::CLI2 'ko:',':all';
-   out $VERSION = 1;
+   use LEOCHARRE::CLI2 'ko:', ':all', 'This program shows example usage.';
+   our $VERSION = 1;
 
    $opt_o or die("Missing -o opt");
    
@@ -52,8 +52,24 @@ New environment variables are set. The are..
 =head2 $ENV{SCRIPT_FILENAME}
 
 Holds name of your script, no leading path.
+Is accessible to main.
+
+=head1 SCRIPT_DESCRIPTION
+
+If you define this, and you don't define usage(), the usage help output generated will 
+contain this string.
 
 
+   use LEOCHARRE::CLI2 'This is a script description because it has spaces.';
+
+When -h is called, if there is not usage() defined, this would spit out:
+
+   /bin/file [OPTION]..
+   This is a script description because it has spaces.
+
+      -d    debug
+      -h    help
+      -v    version
 
 
 
@@ -169,6 +185,7 @@ Usage simply returns a string.
    Hi.. I do x y z.
 
 All cli should have a minimal help that triggers when the user says -h.
+If you define a SCRIPT_DESCRIPTION, it will be placed in the usage generated.
 
 =head1 CAVEATS
 
