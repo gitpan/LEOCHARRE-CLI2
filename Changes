@@ -1,3 +1,16 @@
+2009-09-17 17:42  cvs
+
+	* README, lib/LEOCHARRE/CLI2.pm, lib/LEOCHARRE/CLI2.pod: Improved
+	  README file, some people say they look at the README file before
+	  they check out the POD on cpan to see what the heck the distro is
+	  about, humph.. but..	ok..
+
+	  Cleaned up documentation in pod.
+
+	  This module uses some magick for automatically detecting and
+	  triggering on -h, -v etc..  So, under #!/usr/bin/perl -w was
+	  emitting some false warnings. Took care of that.
+
 2009-04-23 16:08  cvs
 
 	* lib/LEOCHARRE/CLI2.pm, lib/LEOCHARRE/CLI2.pod, t/testfile.pl:

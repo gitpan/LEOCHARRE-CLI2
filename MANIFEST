@@ -15,4 +15,5 @@ t/examplescript1.pl
 t/examplescript2.pl
 t/examplescript3.pl
 t/testfile.pl
+t/warntest.pl
 META.yml                                 Module meta-data (added by MakeMaker)

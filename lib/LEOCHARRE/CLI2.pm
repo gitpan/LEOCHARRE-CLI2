@@ -5,12 +5,13 @@ use Carp;
 use Cwd;
 use strict;
 use Getopt::Std;
+no warnings;
 
 my @export_argv = qw/argv_files argv_files_count argv_dirs argv_dirs_count argv_cwd/;
 @ISA = qw(Exporter);
 @EXPORT_OK = ( qw/yn/, @export_argv );
 %EXPORT_TAGS = ( argv => \@export_argv, all => \@EXPORT_OK, );
-$VERSION = sprintf "%d.%02d", q$Revision: 1.6 $ =~ /(\d+)/g;
+$VERSION = sprintf "%d.%02d", q$Revision: 1.8 $ =~ /(\d+)/g;
 
 #use Smart::Comments '###';
 
@@ -266,9 +267,19 @@ sub usage {
       my $desc = 
          $opt eq 'h' ? 'help' :
          $opt eq 'd' ? 'debug' :
-         $opt eq 'v' ? 'version' : '';
+         $opt eq 'v' ? 'version' : undef;
 
-      $out.="\t-$opt\t\t$desc\n";
+      my $argtype;
+      if (!$desc){         
+         # does it take an arg?
+         if ($main::OPT_STRING=~/$opt\:/){
+            $desc=undef;
+            $argtype='string';
+         }
+      }
+      no warnings;
+      $out.= sprintf "%6s %-10s %s\n",
+         "-$opt", $argtype, $desc;
    }
 
    "$out\n$script_man$script_also";

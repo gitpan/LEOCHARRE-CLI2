@@ -2,7 +2,7 @@
 
 =head1 NAME
 
-LEOCHARRE::CLI2 - quick cli addons
+LEOCHARRE::CLI2 - Some quick help for writing cli scripts.
 
 =head1 SYNOPSIS
 
@@ -16,46 +16,41 @@ In script.pl:
       '[parent package name], # parent package name
       'argv_cwd', # explicit sub import name
       ;
-
+   
    our $VERSION = 1;
-
+   
    $opt_o or die("Missing -o opt");
    
    my @files_selected = argv_files();
-
+   
    my @base_dir_selected = argv_cwd();
-
+   
    my @all_dirs_selected = argv_dirs();
-
+   
    my ($countfiles, $countdirs) = ( argv_dirs_count(), argv_files_count() );
-
+   
    debug("You chose $countfiles files and $countdirs dirs.");
 
 Then to get help:
-
    $ script.pl -h
 
 To get version:
-
    $ script.pl -v
 
 To see debug:
-
    $ script.pl -d -o "my value" ./files* ./dirs*
 
 =head1 DESCRIPTION
 
+Some quick help for writing cli scripts.
+Forces by default that -h triggers help, that -d triggers debug, and -v version..
 Automates help, debug, version etc.
 If you use LEOCHARRE::CLI2, we alter the OPTIONS automatically.
 Also we automatically generate HELP.
 
-
-
-
-
 =head1 Environment Variables
 
-New environment variables are set. The are..
+New environment variables are set. They are..
 
 =head2 $ENV{SCRIPT_FILENAME}
 
@@ -67,14 +62,13 @@ Is accessible to main.
 If you define this, and you don't define usage(), the usage help output generated will 
 contain this string.
 
-
    use LEOCHARRE::CLI2 'This is a script description because it has spaces.';
 
 When -h is called, if there is not usage() defined, this would spit out:
 
    /bin/file [OPTION]..
    This is a script description because it has spaces.
-
+   
       -d    debug
       -h    help
       -v    version
@@ -86,7 +80,6 @@ When -h is called, if there is not usage() defined, this would spit out:
 =head1 SCRIPT MAN PAGE
 
    use LEOCHARRE::CLI2 '(manpagename)';
-
 
 =head1 Argument Variables
 
@@ -105,16 +98,14 @@ To make these accessible, import.
    use LEOCHARRE::CLI2 ':argv'; # for all
    use LEOCHARRE::CLI2  qw/argv_files argv_files_count argv_dirs argv_dirs_count argv_cwd/; # same
 
-
 Usage: script ./pathtodir ./path2dir2 ./path2file.txt
 Then in our script:
 
    my @dirs = argv_dirs(); # holds abs path to dirs
    my $dirs_count = argv_dirs_count();
-
+   
    argv_files_count() 
       or die("you forgot to specidy files on disk.");
-
 
 Note that this alters @ARGV.
 
@@ -123,12 +114,10 @@ If you wish to import these.. Either use export tag ':all' or ':argv'.
 =head2 argv_cwd()
 
 Sometimes you want a destination dir to do something to.
-You want the option for the user to say
-
+You want the option for the user to say;
    script ./path_to/
 
 But if none is provided, you want to assume './'.
-
    my $base_dir = argv_cwd();
 
 =head2 argv_files()
@@ -176,7 +165,7 @@ In this example, we generate our own help, and a manual.
 Usage simply returns a string.
 
    use LEOCHARRE::CLI2;
-
+   
    sub usage {
       q{script [OPTION]...
       -h    help
@@ -186,17 +175,17 @@ Usage simply returns a string.
       Try 'man script' for more info.
       }
    }
-
+   
    __END__
-
+   
    =pod
-
+   
    =head1 NAME
-
+   
    script
-
+   
    =head1 DESCRIPTION
-
+   
    Hi.. I do x y z.
 
 All cli should have a minimal help that triggers when the user says -h.
@@ -208,7 +197,7 @@ Alpha software.
 
 =head1 SEE ALSO
 
-Getopt::Std::Strict
+L<Getopt::Std::Strict>
 
 =head1 AUTHOR
 

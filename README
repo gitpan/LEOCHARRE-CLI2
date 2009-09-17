@@ -1,6 +1,13 @@
 LEOCHARRE::CLI2
 ===============================================
 
+Some quick help for writing cli scripts.
+Forces by default that -h triggers help, that -d triggers debug, and -v version..
+Automates help, debug, version etc.
+If you use LEOCHARRE::CLI2, we alter the OPTIONS automatically.
+Also we automatically generate HELP.
+
+
 INSTALLATION
 
 See INSTALL.

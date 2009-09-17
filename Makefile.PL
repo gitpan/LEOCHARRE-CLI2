@@ -3,6 +3,8 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
    NAME => 'LEOCHARRE::CLI2',
    VERSION_FROM => 'lib/LEOCHARRE/CLI2.pm',
+   ABSTRACT_FROM => 'lib/LEOCHARRE/CLI2.pod',
+   AUTHOR => 'Leo Charre leocharre at cpan dot org',
    
 
    # gen /usr/bin/pmused by Thu Apr 23 16:08:52 EDT 2009 
@@ -24,7 +26,6 @@ WriteMakefile(
    
    
    
-   EXE_FILES => [],
 );
 
 
