@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               LEOCHARRE-CLI2
-version:            1.08
+version:            1.11
 abstract:           Some quick help for writing cli scripts.
 author:
     - Leo Charre leocharre at cpan dot org
@@ -17,10 +17,11 @@ requires:
     Exporter:             5
     Getopt::Std:          1.05
     Getopt::Std::Strict:  1.01
-    LEOCHARRE::DEBUG:     1.12
     LEOCHARRE::Dir:       1.06
     Smart::Comments:      1
+    String::ShellQuote:   1.03
     Test::Simple:         0
+    YAML:                 0.66
 no_index:
     directory:
         - t

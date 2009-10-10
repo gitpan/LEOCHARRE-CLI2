@@ -11,6 +11,8 @@ t/02_envs.t
 t/03_argvs.t
 t/05_envs.pl
 t/05_symdump.t
+t/06_extras-sq-yml.t
+t/07_extras-slurpburp.t
 t/examplescript1.pl
 t/examplescript2.pl
 t/examplescript3.pl

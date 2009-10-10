@@ -9,12 +9,39 @@ no warnings;
 
 my @export_argv = qw/argv_files argv_files_count argv_dirs argv_dirs_count argv_cwd/;
 @ISA = qw(Exporter);
-@EXPORT_OK = ( qw/yn/, @export_argv );
+@EXPORT_OK = ( qw/yn sq cwd abs_path slurp burp/, @export_argv );
 %EXPORT_TAGS = ( argv => \@export_argv, all => \@EXPORT_OK, );
-$VERSION = sprintf "%d.%02d", q$Revision: 1.8 $ =~ /(\d+)/g;
+$VERSION = sprintf "%d.%02d", q$Revision: 1.11 $ =~ /(\d+)/g;
 
 #use Smart::Comments '###';
+use String::ShellQuote;
+use YAML;
 
+*sq = \&String::ShellQuote::shell_quote;
+*abs_path = \&Cwd::abs_path;
+*cwd = \&Cwd::cwd;
+
+
+sub slurp {
+   my $abs = shift;
+   -f $abs or Carp::cluck("Not on disk '$abs'") and return;
+   open( FILE, '<', $abs ) or warn("Could not open for reading '$abs', $!") and return;
+   local $/;
+   my $txt = <FILE>;
+   close FILE;
+   (length $txt) or warn("# nothing inside '$abs'");
+   $txt;
+}
+
+sub burp {
+   my $abs = shift;
+   my $content = shift;
+   defined $content or Carp::cluck("No content arg provided") and return;
+   open( FILE,'>', $abs) or warn("Could not open for writing '$abs', $!") and return;
+   print FILE $content;
+   close FILE;
+   $abs;
+}
 
 sub import {
    my $class = shift;
@@ -166,7 +193,7 @@ sub _init_argv {
          next;
       }
 
-      require Cwd;
+      
       my $abs = Cwd::abs_path($arg);
 
       $isf and (push @files, $abs) and next;

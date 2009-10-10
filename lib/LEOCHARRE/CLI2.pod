@@ -143,6 +143,51 @@ Returns dirs chosen by user, or './' abs path.
 =pod
 
 
+=head2 MODULES LOADED AND AVAILABLE
+
+YAML, Carp, Cwd
+
+
+=head2 abs_path(), cwd()
+
+Available and exported if you choose :all
+
+=head2 slurp()
+
+Arg is file on disk.
+If not there, warns and returns undef.
+If can't do it, warns and returns undef.
+Returns content.
+If no content, warns and returns whatever was inside.
+
+   my $txt = slurp('./this.txt') or die;
+
+=head2 burp()
+
+Arg is path on disk, and content. Dumps to path.
+Warns and returns undef on failure.
+
+   burp('./this.out','content') or die;
+
+
+=head2 yn()
+
+Argument is what to ask the user, they select y or n.
+Returns bool.
+Prompts user.
+
+   if (yn('please say y to continue..')){
+      warn " # continuing.. \n";
+   }
+
+=head2 sq()
+
+Argument is thing to quote for shell use.
+Shortcut to String::ShellQuote::shell_quote().
+
+   my $weird = '/home/myself/path to funny*named, file';
+   my $quoted = sq($weird);
+   my $quoted = sq $weird;
 
 
 =head1 OPTIONS
@@ -198,6 +243,10 @@ Alpha software.
 =head1 SEE ALSO
 
 L<Getopt::Std::Strict>
+L<String::ShellQuote>
+L<YAML>
+:<Carp>
+L<Cwd>
 
 =head1 AUTHOR
 
