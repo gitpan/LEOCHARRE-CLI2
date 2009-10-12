@@ -1,3 +1,9 @@
+2009-10-12 11:59  cvs
+
+	* lib/LEOCHARRE/CLI2.pm, lib/LEOCHARRE/CLI2.pod,
+	  t/07_extras-slurpburp.t: made so slurp() in array context returns
+	  list of lines instead of text scalar
+
 2009-10-09 23:04  cvs
 
 	* lib/LEOCHARRE/: CLI2.pm, CLI2.pod: Added a slurp, burp, yn()

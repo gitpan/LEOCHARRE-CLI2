@@ -11,7 +11,7 @@ my @export_argv = qw/argv_files argv_files_count argv_dirs argv_dirs_count argv_
 @ISA = qw(Exporter);
 @EXPORT_OK = ( qw/yn sq cwd abs_path slurp burp/, @export_argv );
 %EXPORT_TAGS = ( argv => \@export_argv, all => \@EXPORT_OK, );
-$VERSION = sprintf "%d.%02d", q$Revision: 1.11 $ =~ /(\d+)/g;
+$VERSION = sprintf "%d.%02d", q$Revision: 1.12 $ =~ /(\d+)/g;
 
 #use Smart::Comments '###';
 use String::ShellQuote;
@@ -25,12 +25,27 @@ use YAML;
 sub slurp {
    my $abs = shift;
    -f $abs or Carp::cluck("Not on disk '$abs'") and return;
+
+
    open( FILE, '<', $abs ) or warn("Could not open for reading '$abs', $!") and return;
-   local $/;
-   my $txt = <FILE>;
-   close FILE;
-   (length $txt) or warn("# nothing inside '$abs'");
-   $txt;
+
+   if (wantarray){
+      my @lines = <FILE>;
+      close FILE;
+      @lines and scalar @lines or return _empty();
+      return @lines;
+   }
+
+   else {
+
+      local $/;
+      my $txt = <FILE>;
+      close FILE;
+      (length $txt) or return _empty();
+      $txt;
+   }
+
+   sub _empty { Carp::cluck("Nothing inside :'$abs' ?"); return; }
 }
 
 sub burp {

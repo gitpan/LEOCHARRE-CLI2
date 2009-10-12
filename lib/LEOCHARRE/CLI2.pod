@@ -162,6 +162,9 @@ If no content, warns and returns whatever was inside.
 
    my $txt = slurp('./this.txt') or die;
 
+In scalar context returns all text.
+In array context returns all lines, as list.
+
 =head2 burp()
 
 Arg is path on disk, and content. Dumps to path.

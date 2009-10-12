@@ -46,8 +46,15 @@ unlink $abs; # checking..
 ok( burp($abs, $content),'burp()' );
 
 ok -f $abs;
-
 ok( $r = slurp($abs), 'slurp()' );
+ok( length($r) > 60, 'slurp() length was more than 50');
+
+my @r;
+ok( @r = slurp($abs), 'slurp() in array context');
+
+my  $c = scalar @r;
+ok( $c > 10 , "got scalar $c lines");
+
 
 unlink $abs;
 
