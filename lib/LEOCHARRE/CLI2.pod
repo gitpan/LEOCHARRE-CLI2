@@ -183,6 +183,13 @@ Prompts user.
       warn " # continuing.. \n";
    }
 
+=head2 user_exists()
+
+Argument is user name, uses system id command.
+Returns boolean.
+
+   user_exists('leo');
+
 =head2 sq()
 
 Argument is thing to quote for shell use.
@@ -201,6 +208,39 @@ By default unless it is already there, -d -h and -v flags are set to trigger
    -h will trigger help, if no usage() sub is defined, one is generated.
    -d will enable debug
    -v will print version and exit
+
+Each option is accessible viat $opt_*
+So that if you say..
+
+   use LEOCHARRE::CLI2 'ji:';
+
+You have available the variables $opt_i and $opt_j in your namespace.
+
+=head2 %OPT
+
+Holds hash of options.
+
+To access..
+   
+   for ( keys %LEOCHARRE::CLI2::OPT){ ...
+
+=head2 opt_selected()
+
+Returns list of what option keys were chosen, returns undef on none.
+Returns array on list context, array ref on scalar context.
+
+   opts_selected() or die('no options selected');
+
+Optional argument is list of options.
+If you pass arguments, returns true or false if the options selected match exactly.
+
+Therefore..
+If you say:
+
+   opt_selected(qw/a b/);
+
+And $opt_a and $opt_b are defined and nothing else is set, it returns true.
+
 
 
 =head1 HELP

@@ -9,9 +9,9 @@ no warnings;
 
 my @export_argv = qw/argv_files argv_files_count argv_dirs argv_dirs_count argv_cwd/;
 @ISA = qw(Exporter);
-@EXPORT_OK = ( qw/yn sq cwd abs_path slurp burp/, @export_argv );
+@EXPORT_OK = ( qw/yn sq cwd abs_path slurp burp opt_selected user_exists/, @export_argv );
 %EXPORT_TAGS = ( argv => \@export_argv, all => \@EXPORT_OK, );
-$VERSION = sprintf "%d.%02d", q$Revision: 1.12 $ =~ /(\d+)/g;
+$VERSION = sprintf "%d.%02d", q$Revision: 1.15 $ =~ /(\d+)/g;
 
 #use Smart::Comments '###';
 use String::ShellQuote;
@@ -21,6 +21,37 @@ use YAML;
 *abs_path = \&Cwd::abs_path;
 *cwd = \&Cwd::cwd;
 
+
+sub user_exists {
+   my $uname = shift;
+   $uname=~/\w+/ or Carp::cluck("missing user argument") and return;
+   ( system('id', $uname ) == 0) ? 1 : 0
+}
+
+sub opt_selected {
+
+   if (@_){ # then we want to check that every one of thse and no more are selected
+      my %want;
+      @want{@_} =();
+      for ( keys %OPT ){
+         if( defined $OPT{$_} ){
+            exists $want{$_} or return; # then one is set which we did not ask for
+            $want{$_}++;
+         }
+      }
+      for (keys %want){ # make sure they have all been seen as set
+         $want{$_} or return;
+      }
+      return 1;
+   }
+
+   my @selected;
+   for(keys %OPT){
+      defined $OPT{$_} and push @selected, $_;
+   }
+   @selected or return;
+   wantarray ? (@selected) : [@selected];
+}
 
 sub slurp {
    my $abs = shift;

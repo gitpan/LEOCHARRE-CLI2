@@ -1,3 +1,19 @@
+2009-12-22 15:47  cvs
+
+	* lib/LEOCHARRE/: CLI2.pm, CLI2.pod: added sub	using  system id
+	  command to see if user_exists(), better that other methods
+
+2009-10-14 14:22  cvs
+
+	* lib/LEOCHARRE/CLI2.pm, lib/LEOCHARRE/CLI2.pod,
+	  t/08_opt_selected.t: made so opt_selected() optionally takes a
+	  list of options to make sure are set, else return false
+
+2009-10-14 14:07  cvs
+
+	* lib/LEOCHARRE/: CLI2.pm, CLI2.pod: added opt_selected() returns
+	  array of options currently with a definition, with a value
+
 2009-10-12 11:59  cvs
 
 	* lib/LEOCHARRE/CLI2.pm, lib/LEOCHARRE/CLI2.pod,

@@ -1,3 +1,5 @@
+$^O=~/win32|mswin/i and die("OS not supported.\n");
+
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
@@ -5,7 +7,7 @@ WriteMakefile(
    VERSION_FROM => 'lib/LEOCHARRE/CLI2.pm',
    ABSTRACT_FROM => 'lib/LEOCHARRE/CLI2.pod',
    AUTHOR => 'Leo Charre leocharre at cpan dot org',
-   
+
 
    PREREQ_PM => {
       'Carp'                              => '1',
