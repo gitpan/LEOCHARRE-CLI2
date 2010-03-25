@@ -11,7 +11,7 @@ my @export_argv = qw/argv_files argv_files_count argv_dirs argv_dirs_count argv_
 @ISA = qw(Exporter);
 @EXPORT_OK = ( qw/yn sq cwd abs_path slurp burp opt_selected user_exists/, @export_argv );
 %EXPORT_TAGS = ( argv => \@export_argv, all => \@EXPORT_OK, );
-$VERSION = sprintf "%d.%02d", q$Revision: 1.15 $ =~ /(\d+)/g;
+$VERSION = sprintf "%d.%02d", q$Revision: 1.16 $ =~ /(\d+)/g;
 
 #use Smart::Comments '###';
 use String::ShellQuote;
@@ -180,7 +180,7 @@ sub _init_env_ext {
 
 sub import_make_opts {
    
-   for my $l ( qw/h d v/ ){
+   for my $l ( qw/h d/ ){ # took out v version, won't work
       $OPT_STRING=~/$l/ or $OPT_STRING.=$l;
    }
 
@@ -282,9 +282,6 @@ INIT {
    $main::opt_h 
       and print STDERR &main::usage 
       and exit;
-   $main::opt_v 
-      and print STDERR $main::VERSION 
-      and exit;
 }
 
 
@@ -339,8 +336,7 @@ sub usage {
    for my $opt ( sort keys %OPT ){
       my $desc = 
          $opt eq 'h' ? 'help' :
-         $opt eq 'd' ? 'debug' :
-         $opt eq 'v' ? 'version' : undef;
+         $opt eq 'd' ? 'debug' : undef;
 
       my $argtype;
       if (!$desc){         

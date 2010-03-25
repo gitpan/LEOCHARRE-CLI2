@@ -34,17 +34,14 @@ In script.pl:
 Then to get help:
    $ script.pl -h
 
-To get version:
-   $ script.pl -v
-
 To see debug:
    $ script.pl -d -o "my value" ./files* ./dirs*
 
 =head1 DESCRIPTION
 
 Some quick help for writing cli scripts.
-Forces by default that -h triggers help, that -d triggers debug, and -v version..
-Automates help, debug, version etc.
+Forces by default that -h triggers help, that -d triggers debug.
+Automates help, debug, etc.
 If you use LEOCHARRE::CLI2, we alter the OPTIONS automatically.
 Also we automatically generate HELP.
 
@@ -71,7 +68,6 @@ When -h is called, if there is not usage() defined, this would spit out:
    
       -d    debug
       -h    help
-      -v    version
 
 =head1 SCRIPT PARENT PACKAGE
 
@@ -207,7 +203,6 @@ By default unless it is already there, -d -h and -v flags are set to trigger
 
    -h will trigger help, if no usage() sub is defined, one is generated.
    -d will enable debug
-   -v will print version and exit
 
 Each option is accessible viat $opt_*
 So that if you say..
@@ -258,7 +253,6 @@ Usage simply returns a string.
       q{script [OPTION]...
       -h    help
       -d    debug
-      -v    version
       
       Try 'man script' for more info.
       }
@@ -288,7 +282,6 @@ Alpha software.
 L<Getopt::Std::Strict>
 L<String::ShellQuote>
 L<YAML>
-:<Carp>
 L<Cwd>
 
 =head1 AUTHOR

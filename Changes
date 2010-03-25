@@ -1,3 +1,8 @@
+2010-03-24 22:45  cvs
+
+	* lib/LEOCHARRE/: CLI2.pm, CLI2.pod: took out -v VERSION, won't
+	  work.
+
 2009-12-22 15:47  cvs
 
 	* lib/LEOCHARRE/: CLI2.pm, CLI2.pod: added sub	using  system id
